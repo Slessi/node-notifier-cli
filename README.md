@@ -1,6 +1,6 @@
 # `node-notifier` CLI
 
-Separate package for [`node-notifier`](https://github.com/mikaelbr/node-notifier) CLI.
+Separate package for [`node-notifier`](https://github.com/mikaelbr/node-notifier) CLI, tweaked to work with [`nodemon`](https://www.npmjs.com/package/nodemon)
 
 ## Install
 
