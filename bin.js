@@ -26,37 +26,8 @@ readme(aliases, ["host"]);
 
 const validOpts = Object.keys(aliases).concat("host");
 const passedOptions = getOptionsIfExists(validOpts, argv);
-const stdinMessage = "";
 
-if (process.stdin.isTTY) {
-    doNotification(passedOptions);
-} else {
-    process.stdin.resume();
-    process.stdin.setEncoding("utf8");
-
-    process.stdin.on("data", function(data) {
-        if (data) {
-            stdinMessage += data;
-        } else {
-            doNotification(passedOptions);
-            this.end();
-        }
-    });
-
-    process.stdin.on("end", () => {
-        if (stdinMessage) {
-            passedOptions.message = stdinMessage;
-        }
-
-        doNotification(passedOptions);
-    });
-
-    if (typeof passedOptions.failsafe !== "undefined") {
-        setTimeout(() => doNotification(passedOptions), passedOptions.failsafe);
-
-        delete passedOptions.failsafe; // Do not pass failsafe to notifier
-    }
-}
+doNotification(passedOptions);
 
 function doNotification(options) {
     const notifier = new Notification(options);
